@@ -161,6 +161,17 @@ void about(char *ptr) {
 
 COMMAND("about", about, "show system infos");
 
+
+void sleep(char *ptr) {
+  float foo = 0;
+  sscanf(ptr, " %f", &foo);
+  printf("sleeping for %fs\n", foo);
+  Wait((uint32_t)(foo * 1000));
+  printf("wakeup\n");
+}
+
+COMMAND("sleep", sleep, "sleep [s]");
+
 int main(void) {
   // Relocate interrupt vectors
   extern void *g_pfnVectors;

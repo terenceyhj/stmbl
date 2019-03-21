@@ -10,6 +10,7 @@ load fault
 load hv
 load sim
 load io
+load iit
 link conf
 hv0.rt_prio = 0.9
 hv0.frt_prio = 1
@@ -23,6 +24,7 @@ vel2.rt_prio = 6
 io0.rt_prio = 7
 pid0.rt_prio = 8
 fault0.rt_prio = 10
+iit0.rt_prio = 13
 sim0.rt_prio = 13
 term0.rt_prio = 16
 rev0.rev = conf0.cmd_rev
@@ -32,7 +34,9 @@ fb_switch0.joint_rev = conf0.joint_fb_rev
 reslimit0.res = conf0.mot_fb_res
 vel1.j = conf0.j
 vel2.j = conf0.j
-pid0.j = conf0.j
+pid0.j_mot = conf0.j
+pid0.j_load = conf0.j_load
+pid0.j_lpf = conf0.j_lpf
 pid0.pos_p = conf0.pos_p
 pid0.vel_p = conf0.vel_p
 pid0.vel_i = conf0.vel_i
@@ -56,6 +60,7 @@ fault0.high_hv_temp = conf0.high_hv_temp
 fault0.high_mot_temp = conf0.high_mot_temp
 fault0.fan_hv_temp = conf0.fan_hv_temp
 fault0.fan_mot_temp = conf0.fan_mot_temp
+fault0.ac_cur = hv0.abs_cur
 hv0.rev = conf0.out_rev
 hv0.r = conf0.r
 hv0.l = conf0.l
@@ -75,6 +80,8 @@ fb_switch0.com_polecount = conf0.com_fb_polecount
 fb_switch0.mot_offset = conf0.mot_fb_offset
 fb_switch0.joint_offset = conf0.joint_fb_offset
 fb_switch0.com_offset = conf0.com_fb_offset
+fb_switch0.phase_time = conf0.phase_time
+fb_switch0.phase_cur = conf0.phase_cur
 vel0.pos_in = rev0.out
 vel0.en = fault0.en_fb
 vel1.pos_in = fb_switch0.vel_fb
@@ -115,3 +122,8 @@ pe0.vel = vel1.vel
 pe0.r = conf0.r
 pe0.j = conf0.j
 pe0.cap = 0.00054
+iit0.max_temp = conf0.max_mot_temp
+iit0.high_temp = conf0.high_mot_temp
+iit0.max_cur = conf0.max_ac_cur
+fault0.mot_temp = iit0.temp
+iit0.cur = hv0.abs_cur
